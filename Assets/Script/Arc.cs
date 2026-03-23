@@ -9,7 +9,7 @@ public class Arc : Arme
 
     public void Attaquer()
     {
-        base.Attaquer(PlayerCharacter.Cibles[0]);
+        //base.Attaquer(PlayerCharacter.Cibles[0]);
         // J'attaque en Melee
     }
 }

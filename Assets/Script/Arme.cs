@@ -2,7 +2,7 @@ using TP2_Heritage;
 using UnityEditor;
 using UnityEngine;
 
-public class Arme
+public class Arme : IDamager
 {
     // -- Les propriétés --
 
@@ -34,6 +34,7 @@ public class Arme
         degat = valeur;
     }
 
+
     // -- Le fontionnement de ma classe --
     // Que peux faire une arme
 
@@ -42,5 +43,8 @@ public class Arme
         Monster.GetComponent<Enemi>().TakeDamage(degat);
     }
 
-
+    public void faireDegat(IDamageable cible)
+    {
+        throw new System.NotImplementedException();
+    }
 }

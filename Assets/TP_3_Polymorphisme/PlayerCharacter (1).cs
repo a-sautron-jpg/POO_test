@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-namespace TP2_Heritage
+namespace TP3_Polymorphisme
 {
-    // Version du PlayerCharacter du TP1 pour le TP2
+    // Version du PlayerCharacter pour le TP3
     public class PlayerCharacter : MonoBehaviour
     {
         [SerializeField] private string playerName;
@@ -11,10 +11,10 @@ namespace TP2_Heritage
         [SerializeField] private int maxHealth = 100;
         [SerializeField] private float moveSpeed = 5f;
         [SerializeField] private int gold;
-        public GameObject[] Cibles;
+        [SerializeField] private float mana = 100f;
+        [SerializeField] private float maxMana = 100f;
         private bool isInvincible;
         
-        [SerializeField] private string equiped;
         // Propriétés encapsulées avec validation
         public string PlayerName { get { return playerName; } }
         
@@ -48,11 +48,23 @@ namespace TP2_Heritage
             private set { isInvincible = value; }
         }
         
+        public float Mana
+        {
+            get { return mana; }
+            private set { mana = Mathf.Clamp(value, 0, maxMana); }
+        }
+        
+        public float MaxMana
+        {
+            get { return maxMana; }
+            private set { maxMana = Mathf.Max(1, value); }
+        }
+        
         private void Start()
         {
             // Initialisation avec validation
             Health = maxHealth;
-
+            Mana = maxMana;
         }
         
         void Update()
@@ -63,6 +75,12 @@ namespace TP2_Heritage
             }
             
             transform.Translate(Vector3.forward * MoveSpeed * Time.deltaTime);
+            
+            // Régénération de mana
+            if (Mana < MaxMana)
+            {
+                Mana += 0.1f * Time.deltaTime;
+            }
         }
         
         // Méthodes publiques avec logique de validation
@@ -86,28 +104,20 @@ namespace TP2_Heritage
                 Gold += amount;
         }
         
+        public bool SpendMana(float amount)
+        {
+            if (Mana >= amount && amount > 0)
+            {
+                Mana -= amount;
+                return true;
+            }
+            return false;
+        }
+        
         private void Die()
         {
             Debug.Log($"Player {PlayerName} is dead!");
             // Logique de mort ici
         }
-
-        void OnCollisionEnter(Collision collision)
-        {
-            Arme armurie = collision.gameObject.GetComponent<Arme>();
-            if (armurie != null)
-            {
-                equiped = armurie.getName();
-            }
-        }
-
-        //IEnumerator Defense()
-        //{
-        //    while (true)
-        //    {
-        //        Arme.Attaquer(Cibles[0]);
-        //        yield return WaitForSeconds(0.7f);
-        //    }
-        //}
     }
 }

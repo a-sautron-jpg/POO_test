@@ -18,7 +18,7 @@ public class Pantin : MonoBehaviour
         ArmeMelee epee2 = new ArmeMelee();
 
         epee2.setName("Atchoum");
-        epee2.Attaquer();
+        //epee2.Attaquer();
     }
 
     // Update is called once per frame
