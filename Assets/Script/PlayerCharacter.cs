@@ -11,6 +11,7 @@ namespace TP2_Heritage
         [SerializeField] private int maxHealth = 100;
         [SerializeField] private float moveSpeed = 5f;
         [SerializeField] private int gold;
+        public GameObject[] Cibles;
         private bool isInvincible;
         
         [SerializeField] private string equiped;
@@ -51,6 +52,7 @@ namespace TP2_Heritage
         {
             // Initialisation avec validation
             Health = maxHealth;
+
         }
         
         void Update()
@@ -99,6 +101,13 @@ namespace TP2_Heritage
             }
         }
 
-
+        IEnumerator Defense()
+        {
+            while (true)
+            {
+                Arme.Attaquer(Cibles[0]);
+                yield return WaitForSeconds(0.7f);
+            }
+        }
     }
 }
