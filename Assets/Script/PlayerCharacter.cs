@@ -92,14 +92,14 @@ namespace TP2_Heritage
             // Logique de mort ici
         }
 
-        void OnCollisionEnter(Collision collision)
-        {
-            Arme armurie = collision.gameObject.GetComponent<Arme>();
-            if (armurie != null)
-            {
-                equiped = armurie.getName();
-            }
-        }
+        //void OnCollisionEnter(Collision collision)
+        //{
+        //    Arme armurie = collision.gameObject.GetComponent<Arme>();
+        //    if (armurie != null)
+        //    {
+        //        equiped = armurie.getName();
+        //    }
+        //}
 
         //IEnumerator Defense()
         //{
